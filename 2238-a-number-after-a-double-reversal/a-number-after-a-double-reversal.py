@@ -1,10 +1,15 @@
 class Solution:
     def isSameAfterReversals(self, num: int) -> bool:
-        def reverse(n):
-            rev = 0
-            while n > 0:
-                rev = rev * 10 + n % 10
-                n //= 10
-            return rev
+        # First reversal
+        l = list(str(num))
+        num2 = l[::-1]
 
-        return reverse(reverse(num)) == num
+        # Remove leading zeros after first reversal
+        while len(num2) > 1 and num2[0] == "0":
+            num2.pop(0)
+
+        # Second reversal
+        num3 = num2[::-1]
+
+        # Convert back to integer and compare
+        return int("".join(num3)) == num
